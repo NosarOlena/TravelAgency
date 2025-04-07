@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{admin-dashboard.page.title}">Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar .navbar-brand {
+            text-decoration: none; /* Прибираємо підкреслення */
+        }
+
+        .list-group-item a {
+            color: inherit;
+        }
+
+        .list-group-item a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-outline-danger:hover,
+        .btn-outline-primary:hover {
+            text-decoration: none;
+        }
+
+        .d-flex {
+            justify-content: flex-end;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:text="#{all.app.title}">Travel Agency</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <div class="d-flex">
+                <a href="/api/manager/dashboard" class="btn btn-outline-primary" th:text="#{admin-dashboard.button.switch-to-manager-panel}">Switch to Manager Panel</a>
+                <a href="/api/auth/sign-out" class="btn btn-outline-danger" th:text="#{all.button.sign-out}">Sign Out</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div th:if="${successMessage}" class="alert alert-success text-center mx-auto mt-4" role="alert" style="width: 80%; max-width: 600px;">
+    <span th:text="${successMessage}"></span>
+</div>
+
+<div class="container d-flex justify-content-center align-items-start py-4" style="min-height: calc(100vh - 60px);">
+    <div class="card" style="width: 250px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <div class="card-body">
+            <h5 class="card-title text-center" th:text="#{admin-dashboard.page.header}">Admin Panel</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-light" style="cursor: pointer;">
+                    <a href="/api/admin/vouchers" th:text="#{admin-dashboard.menu.view-tours}">View All Vouchers</a>
+                </li>
+                <li class="list-group-item bg-light" style="cursor: pointer;">
+                    <a href="/api/admin/vouchers/add" th:text="#{admin-dashboard.menu.add-tour}">Add New Voucher</a>
+                </li>
+                <li class="list-group-item bg-light" style="cursor: pointer;" onclick="toggleSubmenu()">
+                    <span th:text="#{admin-dashboard.menu.view-users}">View All Users</span>
+                </li>
+                <div id="user-submenu" style="display: none; margin-left: 20px;">
+                    <li class="list-group-item" style="cursor: pointer;">
+                        <a href="/api/admin/users/active" th:text="#{admin-dashboard.menu.view-users.active}">Active Users</a>
+                    </li>
+                    <li class="list-group-item" style="cursor: pointer;">
+                        <a href="/api/admin/users/blocked" th:text="#{admin-dashboard.menu.view-users.blocked}">Blocked Users</a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleSubmenu() {
+        const submenu = document.getElementById("user-submenu");
+        submenu.style.display = submenu.style.display === "none" ? "block" : "none";
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

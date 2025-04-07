@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{my-vouchers.page.title}">My Vouchers</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body class="bg-light text-dark">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:text="#{all.app.title}">Travel Agency</a>
+        <a th:href="@{/}" class="navbar-text" th:text="#{all.navbar.home}">Home</a>
+        <div class="ml-auto">
+            <a href="/api/auth/sign-out" class="btn btn-outline-danger m-2" th:text="#{all.button.sign-out}">Sign Out</a>
+        </div>
+    </div>
+</nav>
+
+<h1 class="text-center my-4" th:text="#{my-vouchers.page.header}">My Vouchers</h1>
+
+<div class="container">
+    <table class="table table-bordered table-hover bg-white">
+        <thead class="thead-light">
+        <tr>
+            <th th:text="#{my-vouchers.column.id}">ID</th>
+            <th th:text="#{my-vouchers.column.title}">Title</th>
+            <th th:text="#{my-vouchers.column.description}">Description</th>
+            <th th:text="#{my-vouchers.column.price}">Price</th>
+            <th th:text="#{my-vouchers.column.tour-type}">Tour Type</th>
+            <th th:text="#{my-vouchers.column.transfer-type}">Transfer Type</th>
+            <th th:text="#{my-vouchers.column.hotel-type}">Hotel Type</th>
+            <th th:text="#{my-vouchers.column.arrival-date}">Arrival Date</th>
+            <th th:text="#{my-vouchers.column.eviction-date}">Eviction Date</th>
+            <th th:text="#{my-vouchers.column.status}">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="voucher : ${vouchers}">
+            <td th:text="${voucher.id}"></td>
+            <td th:text="${voucher.title}"></td>
+            <td th:text="${voucher.description}"></td>
+            <td th:text="${voucher.price}"></td>
+            <td th:text="${voucher.tourType}"></td>
+            <td th:text="${voucher.transferType}"></td>
+            <td th:text="${voucher.hotelType}"></td>
+            <td th:text="${voucher.arrivalDate}"></td>
+            <td th:text="${voucher.evictionDate}"></td>
+            <td th:text="${voucher.status}"></td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(vouchers)}">
+            <td colspan="10" class="text-center text-muted py-4 font-italic" th:text="#{my-vouchers.page.no-results}">
+                No vouchers found.
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{update-username.page.title}">Update Username</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 th:text="#{update-username.page.header}">Update Username</h2>
+
+    <form th:action="@{/api/user/me/update-username}" th:object="${usernameUpdateRequest}" method="post">
+        <div class="form-group">
+            <label for="username" th:text="#{update-username.username.label}">New Username</label>
+            <input th:field="*{username}" type="text" class="form-control" id="username"
+                   th:placeholder="#{update-username.username.placeholder}" required>
+
+            <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
+
+            <div class="text-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" th:text="#{update-username.button}">Update</button>
+    </form>
+</div>
+</body>
+</html>

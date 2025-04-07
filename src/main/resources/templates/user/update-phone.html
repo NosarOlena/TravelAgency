@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{update-phone.page.title}">Update Phone Number</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 th:text="#{update-phone.page.header}">Update Phone Number</h2>
+
+    <form th:action="@{/api/user/me/update-phone}" th:object="${phoneUpdateRequest}" method="post">
+        <div class="form-group">
+            <label for="phone" th:text="#{update-phone.phone.label}">Phone Number</label>
+            <input th:field="*{phoneNumber}" type="text" class="form-control" id="phone"
+                   th:placeholder="#{update-phone.phone.placeholder}" required>
+
+            <div class="text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Phone number error</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" th:text="#{update-phone.button}">Update</button>
+    </form>
+</div>
+</body>
+</html>

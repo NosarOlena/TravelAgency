@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="${#locale.language}">
+<head>
+    <title th:text="#{profile.page.title}">My Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:text="#{all.app.title}">Travel Agency</a>
+        <a th:href="@{/}" class="navbar-text" th:text="#{all.navbar.home}">Home</a>
+        <div class="ml-auto">
+            <a href="/api/auth/sign-out" class="btn btn-outline-danger m-2" th:text="#{all.button.sign-out}">Sign Out</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2 th:text="#{profile.page.header}">My Profile</h2>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    <strong th:text="#{profile.username}">Username:</strong>
+                    <span th:text="${userProfile.username}"></span>
+                </div>
+                <a th:href="@{/api/user/me/update-username}" class="btn btn-sm btn-outline-primary" th:text="#{profile.button.edit}">Edit</a>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    <strong th:text="#{profile.phone}">Phone Number:</strong>
+                    <span th:text="${userProfile.phoneNumber}"></span>
+                </div>
+                <a th:href="@{/api/user/me/update-phone}" class="btn btn-sm btn-outline-primary" th:text="#{profile.button.edit}">Edit</a>
+            </div>
+
+            <div class="mt-4">
+                <strong th:text="#{profile.balance}">Balance:</strong>
+                $<span th:text="${userProfile.balance}"></span>
+            </div>
+
+            <div class="text-center mt-4">
+                <a th:href="@{/api/user/me/vouchers}" class="btn btn-outline-success" th:text="#{profile.button.view-vouchers}">
+                    View My Vouchers
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

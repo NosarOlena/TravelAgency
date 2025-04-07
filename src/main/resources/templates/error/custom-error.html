@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="#{locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{custom-error.page.title}">Error</title>
+</head>
+<body>
+<h1 th:text="#{custom-error.page.header}">Error Occurred</h1>
+<p><strong th:text="#{custom-error.error.type}">Error Type</strong> <span th:text="${errorType}"></span></p>
+<p><strong th:text="#{custom-error.error.message}">Error Message:</strong> <span th:text="${errorMessage}"></span></p>
+<a href="/" th:text="#{error.button.home}">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="#{locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{internal-error.page.title}">Internal Error</title>
+</head>
+<body>
+<h1 th:text="#{internal-error.page.header}">An Unexpected Error Occurred</h1>
+<p th:text="#{internal-error.error.message}">Soory, an unexpected error occured</p>
+<a href="/" th:text="#{error.button.home}">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{manager-dashboard.page.title}">Manager Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar .navbar-brand {
+            text-decoration: none; /* Прибираємо підкреслення */
+        }
+
+        .list-group-item a {
+            color: inherit;
+        }
+
+        .list-group-item a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-outline-danger:hover,
+        .btn-outline-primary:hover {
+            text-decoration: none;
+        }
+
+        .d-flex {
+            justify-content: flex-end;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:text="#{all.app.title}">Travel Agency</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <div class="d-flex">
+                <div th:if="${isAdmin}" class="d-flex justify-content-center">
+                    <a href="/api/admin/dashboard" class="btn btn-outline-primary" th:text="#{manager-dashboard.button.switch-to-admin-panel}">Switch to Admin Panel</a>
+                </div>
+                <a href="/api/auth/sign-out" class="btn btn-outline-danger" th:text="#{all.button.sign-out}">Sign Out</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container d-flex justify-content-center align-items-start py-4" style="min-height: calc(100vh - 60px);">
+    <div class="card" style="width: 250px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <div class="card-body">
+            <h5 class="card-title text-center" th:text="#{manager-dashboard.page.header}">Manager Panel</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-light" style="cursor: pointer;">
+                    <a href="/api/manager/vouchers" th:text="#{manager-dashboard.menu.view-tours}">View All Vouchers</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

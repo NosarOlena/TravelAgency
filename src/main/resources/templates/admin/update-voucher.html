@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{update-voucher.page.title}">Update Voucher</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input, select, button {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cancel-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .cancel-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2 th:text="#{update-voucher.page.header}">Update Voucher</h2>
+
+    <form th:action="@{'/api/admin/vouchers/update/' + ${voucherDTO.id}}" th:object="${voucherDTO}" method="post">
+        <label for="title" th:text="#{update-voucher.form.title}">Title:</label>
+        <input type="text" id="title" th:field="*{title}">
+
+        <label for="description" th:text="#{update-voucher.form.description}">Description:</label>
+        <input type="text" id="description" th:field="*{description}">
+
+        <label for="price" th:text="#{update-voucher.form.price}">Price:</label>
+        <input type="number" id="price" th:field="*{price}" step="0.01">
+
+        <label for="tourType" th:text="#{update-voucher.form.tourType}">Tour Type:</label>
+        <select id="tourType" th:field="*{tourType}">
+            <option th:each="type : ${tourTypes}" th:value="${type}" th:text="${type}"
+                    th:selected="${type == voucherDTO.tourType}"></option>
+        </select>
+
+        <label for="transferType" th:text="#{update-voucher.form.transferType}">Transfer Type:</label>
+        <select id="transferType" th:field="*{transferType}">
+            <option th:each="type : ${transferTypes}" th:value="${type}" th:text="${type}"
+                    th:selected="${type == voucherDTO.transferType}"></option>
+        </select>
+
+        <label for="hotelType" th:text="#{update-voucher.form.hotelType}">Hotel Type:</label>
+        <select id="hotelType" th:field="*{hotelType}">
+            <option th:each="type : ${hotelTypes}" th:value="${type}" th:text="${type}"
+                    th:selected="${type == voucherDTO.hotelType}"></option>
+        </select>
+
+        <label for="arrivalDate" th:text="#{update-voucher.form.arrivalDate}">Arrival Date:</label>
+        <input type="date" id="arrivalDate" th:value="${voucherDTO.arrivalDate}">
+
+        <label for="evictionDate" th:text="#{update-voucher.form.evictionDate}">Eviction Date:</label>
+        <input type="date" id="evictionDate" th:value="${voucherDTO.evictionDate}">
+
+        <label for="hot" th:text="#{update-voucher.form.hot}">Hot:</label>
+        <input type="checkbox" id="hot" th:field="*{isHot}">
+
+        <button type="submit" th:text="#{update-voucher.form.submit}">Update Voucher</button>
+    </form>
+
+    <div class="form-footer">
+        <a href="/api/admin/dashboard" class="cancel-btn" th:text="#{update-voucher.form.cancel}">Cancel</a>
+    </div>
+</div>
+
+</body>
+</html>
